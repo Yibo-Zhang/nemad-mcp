@@ -114,6 +114,9 @@ Example tool arguments:
 {"database_type":"magnetic","elements":"Fe,Co","exact_match":false,"limit":100}
 ```
 
+`count` is the number of matches NEMAD returned, capped by `limit`; it is not the
+database total. To find out whether more exist, search again with a higher limit.
+
 Use the returned `cache_key` in `nemad_read_results`. `start_index` is inclusive
 and `end_index` is exclusive. A page contains at most 100 records; omitting
 `end_index` requests the next 100. Empty search results produce an empty page.
@@ -131,9 +134,7 @@ unbounded cache and text-only result format.
 | `NEMAD_API_KEY` | Required only when making material queries |
 | `NEMAD_BASE_URL` | `https://api.nemad.org/api` |
 
-The base URL must include the API prefix `/api`. The separate public documentation
-page currently contains examples with and without that prefix; the `/api` path is
-the route verified during this project's compatibility check. An override is
+The base URL must include the API prefix `/api`. An override is
 available for trusted alternative deployments and local tests. Only HTTPS or
 loopback HTTP is accepted. Do not send a production key to an untrusted override.
 

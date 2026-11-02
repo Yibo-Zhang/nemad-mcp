@@ -48,7 +48,9 @@ LOCAL_READ = ToolAnnotations(
 
 class SearchResult(BaseModel):
     database_type: DatabaseType
-    count: int
+    count: int = Field(
+        description="Matches NEMAD returned, capped by limit; not the database total."
+    )
     results_returned: int
     cache_key: str
     expires_in_seconds: int = CACHE_TTL_SECONDS
