@@ -1,0 +1,46 @@
+[project]
+name = "nemad-mcp"
+version = "0.2.0"
+description = "Model Context Protocol server for the Northeast Materials Database"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Yibo Zhang" }]
+dependencies = [
+    "mcp[cli]>=2.3.0,<3",
+    "httpx[socks]>=0.28.1,<1",
+    "pydantic>=2.14.2,<3",
+]
+
+[project.urls]
+Homepage = "https://nemad.org"
+Documentation = "https://github.com/Yibo-Zhang/nemad-mcp#readme"
+Repository = "https://github.com/Yibo-Zhang/nemad-mcp"
+Issues = "https://github.com/Yibo-Zhang/nemad-mcp/issues"
+
+[project.scripts]
+nemad-mcp = "nemad:main"
+mcp-nemad = "nemad:main"
+
+[dependency-groups]
+dev = ["pytest>=9.2,<10", "pytest-asyncio>=1.4,<2", "respx>=0.23,<1", "ruff>=0.17,<1"]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nemad"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
